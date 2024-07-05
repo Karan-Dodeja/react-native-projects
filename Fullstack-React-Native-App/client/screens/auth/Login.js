@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TextInput, Alert } from "react-native";
 import React, { useState } from "react";
 import InputBox from "../../components/Forms/InputBox";
 import SubmitButton from "../../components/Forms/SubmitButton";
-const Login = () => {
+const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -48,7 +48,13 @@ const Login = () => {
         handleSubmit={handleSubmit}
       />
       <Text style={styles.linkText}>
-        Not a User Please <Text style={styles.link}>REGISTER</Text>
+        Not a User Please{" "}
+        <Text
+          style={styles.link}
+          onPress={() => navigation.navigate("Register")}
+        >
+          REGISTER
+        </Text>
       </Text>
     </View>
   );
