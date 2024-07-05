@@ -2,16 +2,14 @@ import { View, Text, StyleSheet, TextInput, Alert } from "react-native";
 import React, { useState } from "react";
 import InputBox from "../../components/Forms/InputBox";
 import SubmitButton from "../../components/Forms/SubmitButton";
-
-const Register = () => {
-  const [name, setName] = useState("");
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const handleSubmit = () => {
     try {
       setLoading(true);
-      if (!name || email || password) {
+      if (!email || password) {
         setLoading(false);
         Alert.alert("Please Fill All Fields");
         return;
@@ -25,16 +23,8 @@ const Register = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Register here</Text>
+      <Text style={styles.title}>Login</Text>
       <View style={{ marginHorizontal: 20 }}>
-        <InputBox
-          title={"Name"}
-          autoComplete=""
-          keyboardType=""
-          value={name}
-          setValue={setName}
-          secureTextEntry=""
-        />
         <InputBox
           title={"Email"}
           autoComplete="email"
@@ -53,12 +43,12 @@ const Register = () => {
         />
       </View>
       <SubmitButton
-        btnTitle="Register"
+        btnTitle="Login"
         loading={loading}
         handleSubmit={handleSubmit}
       />
       <Text style={styles.linkText}>
-        Already Register Please <Text style={styles.link}>LOGIN</Text>
+        Not a User Please <Text style={styles.link}>REGISTER</Text>
       </Text>
     </View>
   );
@@ -84,5 +74,4 @@ const styles = StyleSheet.create({
     color: "red",
   },
 });
-
-export default Register;
+export default Login;
