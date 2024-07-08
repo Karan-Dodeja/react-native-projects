@@ -21,6 +21,8 @@ app.get("", (req, res) => {
   });
 });
 
+app.use("/api/v1/auth", require("./routes/userRoutes"));
+
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
