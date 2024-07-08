@@ -1,3 +1,4 @@
+const { hashPassword } = require("../helpers/authHelper");
 const userModal = require("../modals/useModal");
 const registerController = async (req, res) => {
   try {
@@ -22,6 +23,8 @@ const registerController = async (req, res) => {
       });
     }
 
+    // hash
+    const hashPassword = await hashPassword(password);
     // user
     const exisitingUser = await userModal.findOne({
       email: email,
@@ -32,6 +35,12 @@ const registerController = async (req, res) => {
         message: "User Exists with email",
       });
     }
+    // save
+    const user = await userModal({
+      name,
+      email,
+      password: hashPassword,
+    }).save();
     res.status(201).send({
       success: true,
       message: "Registration Successful now login",
