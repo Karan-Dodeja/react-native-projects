@@ -1,5 +1,6 @@
-const { hashPassword } = require("../helpers/authHelper");
+const { hashPassword, comparePassword } = require("../helpers/authHelper");
 const userModal = require("../modals/useModal");
+// register
 const registerController = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -55,4 +56,57 @@ const registerController = async (req, res) => {
   }
 };
 
-module.exports = { registerController };
+// Login
+const loginController = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    //validation
+    if (!email) {
+      return res.status(500).send({
+        success: false,
+        message: "email is req",
+      });
+    }
+    if (!password || password.length < 6) {
+      return res.status(500).send({
+        success: false,
+        message: "password is req",
+      });
+    }
+
+    // user
+    const exisitingUser = await userModal.findOne({
+      email: email,
+    });
+    if (!exisitingUser) {
+      return res.status(500).send({
+        success: false,
+        message: "User Not Found",
+      });
+    }
+
+    // Math password
+    const match = await comparePassword(password, exisitingUser.password);
+    if (!match) {
+      return res.status(500).send({
+        success: false,
+        message: "Invalid username or password",
+      });
+    }
+    res.status(200).send({
+      success: true,
+      message: "Login Successfully",
+      exisitingUser,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "Error in registration.",
+      error,
+    });
+  }
+};
+
+module.exports = { registerController, loginController };
