@@ -1,4 +1,5 @@
 const { hashPassword, comparePassword } = require("../helpers/authHelper");
+const JWT = require("jsonwebtoken");
 const userModal = require("../modals/useModal");
 // register
 const registerController = async (req, res) => {
@@ -26,6 +27,7 @@ const registerController = async (req, res) => {
 
     // hash
     const hashPassword = await hashPassword(password);
+
     // user
     const exisitingUser = await userModal.findOne({
       email: email,
@@ -36,6 +38,7 @@ const registerController = async (req, res) => {
         message: "User Exists with email",
       });
     }
+
     // save
     const user = await userModal({
       name,
@@ -94,9 +97,24 @@ const loginController = async (req, res) => {
         message: "Invalid username or password",
       });
     }
+    // Toke JWT
+    const token = await JWT.sign(
+      {
+        _id: exisitingUser._id,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+
+    // Undefined Password
+    exisitingUser.password = undefined;
+
     res.status(200).send({
       success: true,
       message: "Login Successfully",
+      token,
       exisitingUser,
     });
   } catch (error) {
