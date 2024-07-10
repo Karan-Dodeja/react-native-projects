@@ -8,7 +8,7 @@ const Register = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
       setLoading(true);
       if (!name || email || password) {
@@ -17,7 +17,14 @@ const Register = ({ navigation }) => {
         return;
       }
       setLoading(false);
+      const { data } = await axios.post(
+        "http://localhost:8080/api/v1/auth/register",
+        { name, email, password }
+      );
+      // show message from api call
+      alert(data && data.message);
     } catch (error) {
+      alert(error.response.data.message);
       setLoading(false);
       console.log(error);
     }

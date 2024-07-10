@@ -6,7 +6,7 @@ const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
       setLoading(true);
       if (!email || password) {
@@ -15,7 +15,13 @@ const Login = ({ navigation }) => {
         return;
       }
       setLoading(false);
+      const { data } = await axios.post(
+        "http://localhost:8080/api/v1/auth/register",
+        { email, password }
+      );
+      alert(data && data.message);
     } catch (error) {
+      alert(error.response.data.message);
       setLoading(false);
       console.log(error);
     }
