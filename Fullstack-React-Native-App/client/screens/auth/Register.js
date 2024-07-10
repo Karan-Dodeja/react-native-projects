@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import InputBox from "../../components/Forms/InputBox";
 import SubmitButton from "../../components/Forms/SubmitButton";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Register = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -24,13 +25,18 @@ const Register = ({ navigation }) => {
       );
       // show message from api call
       alert(data && data.message);
+      await AsyncStorage.setItem("@auth", JSON.stringify(data));
     } catch (error) {
       alert(error.response.data.message);
       setLoading(false);
       console.log(error);
     }
   };
-
+  //temp function to check local storage
+  const getLocalStorage = async () => {
+    let data = await AsyncStorage.getItem("@auth");
+  };
+  getLocalStorage();
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Register here</Text>
