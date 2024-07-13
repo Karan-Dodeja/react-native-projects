@@ -19,12 +19,14 @@ const Register = ({ navigation }) => {
         return;
       }
       setLoading(false);
-      const { data } = await axios.post(
-        "http://localhost:8080/api/v1/auth/register",
-        { name, email, password }
-      );
+      const { data } = await axios.post("/auth/register", {
+        name,
+        email,
+        password,
+      });
       // show message from api call
       alert(data && data.message);
+      navigation.navigate("Login");
       await AsyncStorage.setItem("@auth", JSON.stringify(data));
     } catch (error) {
       alert(error.response.data.message);
