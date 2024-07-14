@@ -45,7 +45,7 @@ const ScreenMenus = () => {
             }}
           />
           <Stack.Screen
-            name="Home"
+            name="Account"
             component={Account}
             options={{
               headerBackTitle: "Back",

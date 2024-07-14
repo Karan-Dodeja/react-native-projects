@@ -12,7 +12,10 @@ const AuthProvider = () => {
     token: "",
   });
 
+  let token = state && state.token;
+
   // default axios
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   axios.defaults.baseURL = "http://localhost:8080/api/v1";
 
   // initial local storage data
