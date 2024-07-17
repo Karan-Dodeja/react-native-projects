@@ -8,6 +8,7 @@ import {
 } from "react-native-responsive-screen";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import ImageSlider from "../components/ImageSlider";
+import BodyParts from "../components/BodyParts";
 
 const home = () => {
   return (
@@ -42,9 +43,12 @@ const home = () => {
           </View>
         </View>
       </View>
-      <VieW>
+      <View>
         <ImageSlider />
-      </VieW>
+      </View>
+      <View className="flex-1">
+        <BodyParts />
+      </View>
     </SafeAreaView>
   );
 };
