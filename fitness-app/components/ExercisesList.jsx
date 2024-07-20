@@ -7,6 +7,7 @@ import React from "react";
 import { useRouter } from "expo-router";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Image } from "expo-image";
+import { FadeInDown } from "react-native-reanimated";
 
 const ExercisesList = ({ data }) => {
   const router = useRouter();
@@ -31,7 +32,12 @@ const ExercisesList = ({ data }) => {
 
 const ExerciseCard = ({ item, router, index }) => {
   return (
-    <View>
+    <Animated.View
+      entering={FadeInDown.duration(400)
+        .delay(index * 200)
+        .springify()
+        .damping(3)}
+    >
       <TouchableOpacity
         onPress={() =>
           router.push({ pathName: "/exerciseDetails", params: item })
@@ -55,7 +61,7 @@ const ExerciseCard = ({ item, router, index }) => {
             : item.name}
         </Text>
       </TouchableOpacity>
-    </View>
+    </Animated.View>
   );
 };
 

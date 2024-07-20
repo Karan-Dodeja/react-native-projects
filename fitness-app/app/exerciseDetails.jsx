@@ -7,6 +7,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import Animated from "react-native-reanimated";
 
 const exerciseDetails = () => {
   const item = useLocalSearchParams();
@@ -32,22 +33,25 @@ const exerciseDetails = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 60 }}
       >
-        <Text
+        <Animated.Text
+          entering={FadeInDown.duration(300).springify()}
           className="font-semibold text-neutral-800 tracking-wide"
           style={{ fontSize: hp(3.5) }}
         >
           {item.name}
-        </Text>
+        </Animated.Text>
 
-        <Text
+        <Animated.Text
+          entering={FadeInDown.delay(100).duration(300).springify()}
           className="text-neutral-700 tracking-wide"
           style={{ fontSize: hp(2) }}
         >
           Equipment{" "}
           <Text className="font-bold text-neutral-800">{item?.equipment}</Text>
-        </Text>
+        </Animated.Text>
 
-        <Text
+        <Animated.Text
+          entering={FadeInDown.delay(200).duration(200).springify()}
           className="text-neutral-700 tracking-wide"
           style={{ fontSize: hp(2) }}
         >
@@ -55,17 +59,19 @@ const exerciseDetails = () => {
           <Text className="font-bold text-neutral-800">
             {item?.secondaryMuscles}
           </Text>
-        </Text>
+        </Animated.Text>
 
-        <Text
+        <Animated.Text
+          entering={FadeInDown.delay(300).duration(300).springify()}
           className="text-neutral-700 tracking-wide"
           style={{ fontSize: hp(2) }}
         >
           Target
           <Text className="font-bold text-neutral-800">{item?.target}</Text>
-        </Text>
+        </Animated.Text>
 
-        <Text
+        <Animated.Text
+          entering={FadeInDown.delay(400).duration(300).springify()}
           className="text-neutral-700 tracking-wide"
           style={{ fontSize: hp(3.5) }}
         >
@@ -73,17 +79,20 @@ const exerciseDetails = () => {
           <Text className="font-bold text-neutral-800">
             {item?.instructions.split(",").map((instruction, index) => {
               return (
-                <Text
+                <Animated.Text
+                  entering={FadeInDown.delay((index + 6) * 100)
+                    .duration(300)
+                    .springify()}
                   style={{ fontSize: hp(1.7) }}
                   className="text-neutral800"
                   key={instruction}
                 >
                   {instruction}
-                </Text>
+                </Animated.Text>
               );
             })}
           </Text>
-        </Text>
+        </Animated.Text>
       </ScrollView>
     </View>
   );

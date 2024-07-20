@@ -11,7 +11,6 @@ const index = () => {
   const router = useRouter();
   return (
     <View className="flex-1 flex justify-end">
-      <StatusBar style="light" />
       <Image
         className="h-full w-full absolute"
         source={require("../assets/images/welcome.png")}
@@ -55,6 +54,7 @@ const index = () => {
           </TouchableOpacity>
         </Animated.View>
       </LinearGradient>
+      <StatusBar style="light" />
     </View>
   );
 };
