@@ -32,7 +32,12 @@ const ExercisesList = ({ data }) => {
 const ExerciseCard = ({ item, router, index }) => {
   return (
     <View>
-      <TouchableOpacity className="flex py-3 space-y-2">
+      <TouchableOpacity
+        onPress={() =>
+          router.push({ pathName: "/exerciseDetails", params: item })
+        }
+        className="flex py-3 space-y-2"
+      >
         <View className="bg-neutral-200 shadow rounded-[25px]">
           <Image
             source={{ uri: item.gifUrl }}
