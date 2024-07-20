@@ -7,8 +7,10 @@ import {
 import { FlatList } from "react-native-gesture-handler";
 import { bodyParts } from "../constants/Index";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
 
 const BodyParts = () => {
+  const router = useRouter();
   return (
     <View className="mx-4 ">
       <Text
@@ -27,17 +29,18 @@ const BodyParts = () => {
           justifyContent: "space-between",
         }}
         renderItem={({ item, index }) => (
-          <BodyPartCard index={index} item={item} />
+          <BodyPartCard router={router} index={index} item={item} />
         )}
       />
     </View>
   );
 };
 
-const BodyPartCard = ({ item, index }) => {
+const BodyPartCard = ({ item, index, router }) => {
   return;
   <View>
     <TouchableOpacity
+      onPress={() => router.push({ pathname: "/exercises", params: item })}
       style={{ width: wp(44), height: wp(52) }}
       className="flex justify-end p-4 mb-4"
     >

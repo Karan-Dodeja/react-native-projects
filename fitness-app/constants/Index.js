@@ -1,3 +1,4 @@
+export const apiKey = "ce8a58bd14msh966fbf967723900p127dc8jsnc12ed5ab7676";
 export const sliderImages = [
   require("../assets/images/slide1.png"),
   require("../assets/images/slide3.png"),
